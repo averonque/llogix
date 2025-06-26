@@ -1,0 +1,18 @@
+name: Run Supabase Rapid Worker
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour. Adjust as needed.
+  workflow_dispatch:      # Allows manual trigger in the GitHub UI
+
+jobs:
+  run-curl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run curl to trigger Supabase function
+        run: |
+          curl -L -X POST 'https://qfxejgklkwfrkzoaztee.supabase.co/functions/v1/rapid-worker' \
+            -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFmeGVqZ2tsa3dmcmt6b2F6dGVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5MDg2NjUsImV4cCI6MjA1OTQ4NDY2NX0.ojQ-syvH2JYLBaXvIF0wc9ErjtpS_sMMXNPPQh1KGkQ' \
+            -H 'Content-Type: application/json' \
+            --data '{"token":"94439-apse2-3e7e5303552d0b09b4bfd7187443bc2f325c1d6c"}'
